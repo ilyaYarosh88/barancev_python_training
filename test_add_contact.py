@@ -15,7 +15,10 @@ class TestAddContact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.add_new_contact(wd)
+        self.add_new_contact(wd, "Ivan", "Sergeevich", "Petrov", "Butthead", "test", "Gazprom", "Moscow",
+                             "+74950000000", "+79190000000", "+74951000000", "+74952000000", "ispetrov@mail.ru",
+                             "ispetrov2@mail.ru", "ispetrov3@mail.ru", "www.petrov.su", "2", "April", "1973", "6",
+                             "May", "1999", "Moscow", "1", "Test")
         self.return_home_page(wd)
         self.logout(wd)
 
@@ -25,11 +28,9 @@ class TestAddContact(unittest.TestCase):
     def return_home_page(self, wd):
         wd.find_element_by_link_text("home page").click()
 
-    def add_new_contact(self, wd, firstname="Ivan", middlename="Sergeevich", lastname="Petrov", nickname="Butthead",
-                        title="test", company="Gazprom", address="Moscow", homephone="+74950000000", mobilephone="+79190000000",
-                        workphone="+74951000000", fax="+74952000000", email="ispetrov@mail.ru", email2="ispetrov2@mail.ru",
-                        email3="ispetrov3@mail.ru", homepage="www.petrov.su", bday="2", bmonth="April", byear="1973",
-                        aday="6", amonth="May", ayear="1999", address2="Moscow", phone2="1", notes="Test"):
+    def add_new_contact(self, wd, firstname, middlename, lastname, nickname, title, company, address, homephone,
+                        mobilephone, workphone, fax, email, email2, email3, homepage, bday, bmonth, byear, aday, amonth,
+                        ayear, address2, phone2, notes):
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         # fill contact firm
