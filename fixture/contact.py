@@ -92,7 +92,7 @@ class ContactHelper:
 
     def edit_first_contact(self, contact):
         wd = self.app.wd
-        wd.find_element_by_link_text("Edit").click()
+        wd.find_element_by_xpath("/html/body/div[1]/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
         # edit contact firm
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -170,7 +170,7 @@ class ContactHelper:
         wd.find_element_by_name("notes").send_keys(contact.notes)
         wd.find_element_by_name("theform").click()
         # submit contact update
-        wd.find_element_by_name("update")
+        wd.find_element_by_name("update").click()
 
         self.return_to_home_page()
 
