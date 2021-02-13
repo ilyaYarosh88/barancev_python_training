@@ -115,7 +115,6 @@ class ContactHelper:
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
         wd.find_element_by_name("address").send_keys(contact.address)
-        wd.find_element_by_name("theform").click()
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
         wd.find_element_by_name("home").send_keys(contact.home)
@@ -164,11 +163,9 @@ class ContactHelper:
         wd.find_element_by_name("phone2").click()
         wd.find_element_by_name("phone2").clear()
         wd.find_element_by_name("phone2").send_keys(contact.phone2)
-        wd.find_element_by_name("theform").click()
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
-        wd.find_element_by_name("theform").click()
         # submit contact update
         wd.find_element_by_name("update").click()
 
