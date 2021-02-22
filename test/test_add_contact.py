@@ -10,7 +10,7 @@ def test_create_contact(app):
                             email="ispetrov@mail.ru", email2="ispetrov2@mail.ru", email3="ispetrov3@mail.ru",
                             homepage="www.petrov.su", bday="2", bmonth="April", byear="1973", aday="6", amonth="May",
                             ayear="1999", address2="Moscow", phone2="1", notes="Test"))
-    app.session.logout()
+
 
 
 

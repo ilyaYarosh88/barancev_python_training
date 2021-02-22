@@ -10,4 +10,4 @@ def test_edit_first_contact(app):
                             email="Editedispetrov@mail.ru", email2="Editedispetrov2@mail.ru", email3="Editedispetrov3@mail.ru",
                             homepage="Editedwww.petrov.su", bday="9", bmonth="May", byear="1974", aday="9", amonth="May",
                             ayear="2000", address2="EditedMoscow", phone2="1111", notes="EditedTest"))
-    app.session.logout()
+
