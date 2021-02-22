@@ -3,7 +3,6 @@ from model.contact import Contact
 
 
 def test_create_contact(app):
-
     app.contact.create(Contact(firstname="Ivan", middlename="Sergeevich", lastname="Petrov", nickname="Butthead",
                             title="test", company="Gazprom", address="Moscow", home="+74950000000",
                             mobile="+79190000000", work="+74951000000", fax="+74952000000",

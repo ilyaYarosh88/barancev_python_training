@@ -3,12 +3,10 @@ from model.group import Group
 
 
 def test_add_group(app):
-
     app.group.create(Group(name="testName", header="testHeader", footer="testFooter"))
 
 
 def test_add_empty_group(app):
-
     app.group.create(Group(name="", header="", footer=""))
 
 
