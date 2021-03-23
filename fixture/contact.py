@@ -138,6 +138,6 @@ class ContactHelper:
             cells = element.find_elements_by_tagname("td")
             firstname = cells[2].text
             lastname = cells[1].text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(id=contact_id, lastname=lastname, firstname=firstname, id=id))
+            contact_id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(Contact_id=contact_id, lastname=lastname, firstname=firstname, id=id))
         return contacts
