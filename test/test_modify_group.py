@@ -4,7 +4,7 @@ from model.group import Group
 
 def test_modify_first_group(app):
     if app.group.count() == 0:
-        app.group.create(Group(name="Name", header="Header", footer="Footer"))
+        app.group.create_group(Group(name="Name", header="Header", footer="Footer"))
     old_groups = app.group.get_group_list()
     group = Group(name="EditedGroup", header="EditedHeader", footer="EditedFooter")
     group.id = old_groups[0].id

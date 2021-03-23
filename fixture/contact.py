@@ -6,7 +6,7 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def create(self, contact):
+    def add_contact(self, contact):
         wd = self.app.wd
         self.open_home_page()
         # init contact creation
