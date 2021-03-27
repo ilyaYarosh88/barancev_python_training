@@ -29,6 +29,27 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    def change_field_value(self, field_name, text):
+         wd = self.app.wd
+         if text is not None:
+             wd.find_element_by_name(field_name).click()
+             wd.find_element_by_name(field_name).clear()
+             wd.find_element_by_name(field_name).send_keys(text)
+
+    def open_contact_to_edit_by_index(self, index):
+        wd = self.app.wd
+        self.open_home_page()
+        row = wd.find_element_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[7]
+        cell.find_element_by_tag_name("a").click()
+
+    def open_contact_view_by_index(self, index):
+        wd = self.app.wd
+        self.open_home_page()
+        row = wd.find_element_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[7]
+        cell.find_element_by_tag_name("a").click()
+
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
