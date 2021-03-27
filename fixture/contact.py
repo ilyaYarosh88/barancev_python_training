@@ -173,7 +173,12 @@ class ContactHelper:
                 firstname = cells[2].text
                 lastname = cells[1].text
                 contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
-                self.contact_cache.append(Contact(id=contact_id, lastname=lastname, firstname=firstname))
+                #так как в ячейке телефонов отдельные телефоны не указаны приходится получать информацию по всей ячейке а потом порезать её на части
+                all_phones = cells[5].text.splitlines() #теперь это список телефонов у ячейки берём текст а потом делим его на телефоны
+                # и мы можем этот список использовать что бы заполнить свойства объекта contact
+                self.contact_cache.append(Contact(id=contact_id, lastname=lastname, firstname=firstname,
+                                                  homephone=all_phones[0], mobilephone=all_phones[1],
+                                                  workphone=all_phones[2], secondaryphone=all_phones[3]))
         return list(self.contact_cache)
 
 
