@@ -39,15 +39,15 @@ class ContactHelper:
     def open_contact_to_edit_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        row = wd.find_element_by_name("entry")[index]
+        row = wd.find_elements_by_name("entry")[index]
         cell = row.find_elements_by_tag_name("td")[7]
         cell.find_element_by_tag_name("a").click()
 
     def open_contact_view_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        row = wd.find_element_by_name("entry")[index]
-        cell = row.find_elements_by_tag_name("td")[7]
+        row = wd.find_elements_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[6]
         cell.find_element_by_tag_name("a").click()
 
     def delete_first_contact(self):
@@ -105,13 +105,13 @@ class ContactHelper:
         wd.find_element_by_name("address").send_keys(contact.address)
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(contact.homephone)
+        wd.find_element_by_name("home").send_keys(contact.home)
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(contact.mobilephone)
+        wd.find_element_by_name("mobile").send_keys(contact.mobile)
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(contact.workphone)
+        wd.find_element_by_name("work").send_keys(contact.work)
         wd.find_element_by_name("fax").click()
         wd.find_element_by_name("fax").clear()
         wd.find_element_by_name("fax").send_keys(contact.fax)
@@ -150,7 +150,7 @@ class ContactHelper:
         wd.find_element_by_name("address2").send_keys(contact.address2)
         wd.find_element_by_name("phone2").click()
         wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys(contact.secondaryphone)
+        wd.find_element_by_name("phone2").send_keys(contact.phone2)
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
@@ -170,15 +170,15 @@ class ContactHelper:
             self.contact_cache = []
             for row in wd.find_elements_by_name("entry"):
                 cells = row.find_elements_by_tag_name("td")
-                firstname = cells[2].text
-                lastname = cells[1].text
+                firstname = cells[1].text
+                lastname = cells[2].text
                 contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 #так как в ячейке телефонов отдельные телефоны не указаны приходится получать информацию по всей ячейке а потом порезать её на части
                 all_phones = cells[5].text.splitlines() #теперь это список телефонов у ячейки берём текст а потом делим его на телефоны
                 # и мы можем этот список использовать что бы заполнить свойства объекта contact
                 self.contact_cache.append(Contact(id=contact_id, lastname=lastname, firstname=firstname,
-                                                  homephone=all_phones[0], mobilephone=all_phones[1],
-                                                  workphone=all_phones[2], secondaryphone=all_phones[3]))
+                                                  home=all_phones[0], mobile=all_phones[1],
+                                                  work=all_phones[2], phone2=all_phones[3]))
         return list(self.contact_cache)
 
 
@@ -192,9 +192,9 @@ class ContactHelper:
         id = wd.find_element_by_name("id").get_attribute("value")
         homephone = wd.find_element_by_name("home").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
-        mobilephone = wd.find_element_by_name("moble").get_attribute("value")
-        secondaryphone = wd.find_element_by_name("phone2").get_attrubute("value")
+        mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
+        secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
         # Строим объект из полученных данных, сначала название параметра а потом название локальной переменной
-        return Contact(firstname=firstname, lastname=lastname,id=id,
-                       homephone=homephone, mobilephone=mobilephone,
-                       workphone=workphone, secondaryphone=secondaryphone)
+        return Contact(firstname=firstname, lastname=lastname, id=id,
+                       home=homephone, mobile=mobilephone,
+                       work=workphone, phone2=secondaryphone)

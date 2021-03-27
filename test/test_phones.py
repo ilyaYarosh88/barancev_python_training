@@ -11,9 +11,9 @@ def test_phones_on_home_page(app):
     # Получаем информацию о контакте из формы редактирования
     contact_from_edit_page = app.contact.get_contact_info_from_edit_page(0)
     # Сравниваем объекты между собой
-    assert contact_from_home_page.homephone == contact_from_edit_page.homephone
-    assert contact_from_home_page.workphone == contact_from_edit_page.workphone
-    assert contact_from_home_page.mobilephone == contact_from_edit_page.mobilephone
-    assert contact_from_home_page.secondaryphone == contact_from_edit_page.secondaryphone
+    assert contact_from_home_page.home == contact_from_edit_page.home
+    assert contact_from_home_page.work == contact_from_edit_page.work
+    assert contact_from_home_page.mobile == contact_from_edit_page.mobile
+    assert contact_from_home_page.phone2 == contact_from_edit_page.phone2
 
 
