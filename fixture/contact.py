@@ -175,3 +175,21 @@ class ContactHelper:
                 contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 self.contact_cache.append(Contact(id=contact_id, lastname=lastname, firstname=firstname))
         return list(self.contact_cache)
+
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        #открываем форму редактирования по заданному индексу
+        self.open_contact_to_edit_by_index(index)
+        #из формы читаем информацию
+        firstname = wd.find_element_by_name("firstname").get_attribute("value")#текст который мы видим в поле является значением аттрибута value
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        id = wd.find_element_by_name("id").get_attribute("value")
+        homephone = wd.find_element_by_name("home").get_attribute("value")
+        workphone = wd.find_element_by_name("work").get_attribute("value")
+        mobilephone = wd.find_element_by_name("moble").get_attribute("value")
+        secondaryphone = wd.find_element_by_name("phone2").get_attrubute("value")
+        # Строим объект из полученных данных, сначала название параметра а потом название локальной переменной
+        return Contact(firstname=firstname, lastname=lastname,id=id,
+                       homephone=homephone, mobilephone=mobilephone,
+                       workphone=workphone, secondaryphone=secondaryphone)
