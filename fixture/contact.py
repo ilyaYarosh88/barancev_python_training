@@ -1,5 +1,7 @@
 from selenium.webdriver.support.ui import Select
 from model.contact import Contact
+import re
+
 
 class ContactHelper:
 
@@ -197,4 +199,18 @@ class ContactHelper:
         # Строим объект из полученных данных, сначала название параметра а потом название локальной переменной
         return Contact(firstname=firstname, lastname=lastname, id=id,
                        home=homephone, mobile=mobilephone,
+                       work=workphone, phone2=secondaryphone)
+
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.open_contact_view_by_index(index)
+        #вытаскиваем текст
+        text = wd.find_element_by_id("content").text
+        homephone = re.search("H: (.*)", text).group(1)
+        workphone = re.search("W: (.*)", text).group(1)
+        mobilephone = re.search("M: (.*)", text).group(1)
+        secondaryphone = re.search("P: (.*)", text).group(1)
+
+        return Contact(home=homephone, mobile=mobilephone,
                        work=workphone, phone2=secondaryphone)
