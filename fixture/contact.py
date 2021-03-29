@@ -172,14 +172,13 @@ class ContactHelper:
             self.contact_cache = []
             for row in wd.find_elements_by_name("entry"):
                 cells = row.find_elements_by_tag_name("td")
+                contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 firstname = cells[1].text
                 lastname = cells[2].text
-                contact_id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 #так как в ячейке телефонов отдельные телефоны не указаны приходится получать информацию по всей ячейке а потом порезать её на части
                 all_phones = cells[5].text #теперь это список телефонов у ячейки берём текст а потом делим его на телефоны
                 # и мы можем этот список использовать что бы заполнить свойства объекта contact
-                self.contact_cache.append(Contact(id=contact_id, all_phones_from_home_page=all_phones, lastname=lastname,
-                                                  firstname=firstname,))
+                self.contact_cache.append(Contact(id=contact_id, all_phones_from_home_page=all_phones, lastname=lastname, firstname=firstname))
         return list(self.contact_cache)
 
 

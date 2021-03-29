@@ -29,8 +29,8 @@ def clear(s):
     return re.sub("[() -]", "", s)
 
 def merge_phones_like_on_home_page(contact):
-    "\n".join(filter(lambda x: x != "",
-                     map(lambda x: clear(x),
-                         filter(lambda x: x is not None, [contact.home, contact.work, contact.mobile,
+    return "\n".join(filter(lambda x: x != "",
+                            map(lambda x: clear(x),
+                                filter(lambda x: x is not None, [contact.home, contact.work, contact.mobile,
                                                                               contact.phone2]))))
 
