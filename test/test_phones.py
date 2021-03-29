@@ -1,5 +1,6 @@
 import re
 
+
     # в метод передается фикстура
     # фикстура инициализирует объект класса application
     # там имеется ссылка на контакт хелпер из него мы будем получать информацию
@@ -31,6 +32,8 @@ def clear(s):
 def merge_phones_like_on_home_page(contact):
     return "\n".join(filter(lambda x: x != "",
                             map(lambda x: clear(x),
-                                filter(lambda x: x is not None, [contact.home, contact.work, contact.mobile,
-                                                                              contact.phone2]))))
+                                filter(lambda x: x is not None,
+                                       [contact.home, contact.work, contact.mobile, contact.phone2]))))
+
+
 
