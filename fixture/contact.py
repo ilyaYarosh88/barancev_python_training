@@ -231,11 +231,11 @@ class ContactHelper:
         #вытаскиваем текст
         text = wd.find_element_by_id("content").text
         home = re.search("H: (.*)", text).group(1)
-        work = re.search("W: (.*)", text).group(1)
         mobile = re.search("M: (.*)", text).group(1)
+        work = re.search("W: (.*)", text).group(1)
         phone2 = re.search("P: (.*)", text).group(1)
 
-        return Contact(home=home, work=work, mobile=mobile, phone2=phone2)
+        return Contact(home=home, mobile=mobile, work=work, phone2=phone2)
 
     def change_field_value_date(self, field_date, text):
         wd = self.app.wd
