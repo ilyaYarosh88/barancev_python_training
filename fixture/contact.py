@@ -202,8 +202,11 @@ class ContactHelper:
                 #так как в ячейке телефонов отдельные телефоны не указаны приходится получать информацию по всей ячейке а потом порезать её на части
                 all_phones = cells[5].text #теперь это список телефонов у ячейки берём текст а потом делим его на телефоны
                 # и мы можем этот список использовать что бы заполнить свойства объекта contact
+                all_emails = cells[4].text
                 self.contact_cache.append(
-                    Contact(firstname=firstname, lastname=lastname, id=id, all_phones_from_home_page=all_phones))
+                    Contact(firstname=firstname, lastname=lastname, id=id, all_phones_from_home_page=all_phones,
+                            all_emails_from_home_page=all_emails))
+
 
         return list(self.contact_cache)
 
@@ -220,9 +223,12 @@ class ContactHelper:
         work = wd.find_element_by_name("work").get_attribute("value")
         mobile = wd.find_element_by_name("mobile").get_attribute("value")
         phone2 = wd.find_element_by_name("phone2").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         # Строим объект из полученных данных, сначала название параметра а потом название локальной переменной
         return Contact(firstname=firstname, lastname=lastname, home=home, mobile=mobile, work=work, phone2=phone2,
-                       id=id)
+                       id=id, email=email, email2=email2, email3=email3)
 
 
     def get_contact_from_view_page(self, index):
