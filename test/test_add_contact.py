@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 from model.contact import Contact
+import pytest
+import random
+import string
 
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-
-
+@pytest.mark.parametrize("contact", testdata, ids=[repr(y) for y in testdata])
 def test_add_contact(app):
     old_contact_list = app.contact.get_contact_list()
     contact = Contact(firstname="Ivan", middlename="Sergeevich", lastname="Petrov", nickname="Butthead", title="test",
