@@ -8,40 +8,43 @@ def random_string(prefix, maxlen):
     symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
+testdata = [Contact(firstname="", lastname="")] + [
+               Contact(firstname=random_string("firstname", 10), lastname=random_string("lastname", 10))
+               for i in range(5)
+           ]
+# testdata = [
+#     Contact(firstname=firstname, middlename=middlename, lastname=lastname, nickname=nickname, title=title,
+#                      company=company, address=address, home=home, mobile=mobile, email=email, email2=email2,
+#                      email3=email3, bday=bday, bmonth=bmonth,
+#                      byear=byear, address2=address2, phone2=phone2, notes=notes)
+#     for lastname in ["" ,random_string("lastname", 15)]
+#     for firstname in ["", random_string("firstname", 10)]
+#     for middlename in ["", random_string("middlename", 15)]
+#     for nickname in ["", random_string("nickname", 10)]
+#     for title  in ["", random_string("title", 20)]
+#     for company in ["", random_string("company", 20)]
+#     for address in ["", random_string("address", 20)]
+#     for home in ["", random_string("home", 20)]
+#     for mobile in ["", random_string("mobile", 20)]
+#     for work in ["", random_string("work", 20)]
+#     for fax in ["", random_string("fax", 20)]
+#     for email in ["", random_string("email", 20)]
+#     for email2 in ["", random_string("email2", 20)]
+#     for email3 in ["", random_string("email3", 20)]
+#     for homepage in ["", random_string("homepage", 20)]
+#     for byear in ["", random_string("byear", 20)]
+#     for bmonth in ["-", choice(constant.MONTHS)]
+#     for bday in ["", str(randint(1, 31))]
+#     for ayear in ["", get_random_word(constant.SYMBOLS, randint(1, 4)),
+#     for amonth in ["-", choice(constant.MONTHS)]
+#     for aday in ["", str(randint(1, 31)]
+#     for address2 in ["", random_string("title", 20)]]
+#     for phone2 in ["", random_string("title", 20)]
+#     for notes in ["", random_string("title", 20)]
+# ]
 
-testdata = [ Contact(firstname="firstname", middlename="middlename", lastname="lastname", nickname="nickname", title="title",
-                     company="company", address="address", home="home", mobile="mobile", email="email", email2="email2",
-                     email3="email3", bday="bday", bmonth="bmonth",
-                     byear="byear", address2="address2", phone2="phone2", notes="notes")] + [
-    Contact(lastname=random_string("lastname", 15),
-            firstname="" if private and bool(getrandbits(1)) else random_string("firstname", 10),
-            middlename="" if private and bool(getrandbits(1)) else random_string("middlename", 15),
-            nickname="" if private and bool(getrandbits(1)) else random_string("nickname", 10),
-            title="" if private and bool(getrandbits(1)) else random_string("title", 20),
-            company="" if private and bool(getrandbits(1)) else random_string("company", 30),
-            address="" if private and bool(getrandbits(1)) else random_string("address", 50),
-            home="" if phones and bool(getrandbits(1)) else random_string("phone_home", 15),
-            mobile="" if phones and bool(getrandbits(1)) else random_string("mobile", 15),
-            work="" if phones and bool(getrandbits(1)) else random_string("phone_work", 15),
-            fax="" if phones and bool(getrandbits(1)) else random_string("fax", 15),
-            email="" if emails and bool(getrandbits(1)) else random_string("email_main", 15),
-            email2="" if emails and bool(getrandbits(1)) else random_string("email_secondary", 15),
-            email3="" if emails and bool(getrandbits(1)) else random_string("email_other", 15),
-            homepage="" if emails and bool(getrandbits(1)) else random_string("homepage", 15),
-            byear="" if emails and bool(getrandbits(1)) else get_random_word(constant.SYMBOLS, randint(1, 4)),
-            bmonth="-" if emails and bool(getrandbits(1)) else choice(constant.MONTHS),
-            bday="" if emails and bool(getrandbits(1)) else str(randint(1, 31)),
-            ayear="" if emails and bool(getrandbits(1)) else get_random_word(constant.SYMBOLS, randint(1, 4)),
-            amonth="-" if emails and bool(getrandbits(1)) else choice(constant.MONTHS),
-            aday="" if emails and bool(getrandbits(1)) else str(randint(1, 31)),
-            address2="" if secondary and bool(getrandbits(1)) else random_string("address_secondary", 15),
-            phone2="" if secondary and bool(getrandbits(1)) else random_string("phone_secondary", 15),
-            notes="" if secondary and bool(getrandbits(1)) else random_string("notes", 15))
-            for i in range(5)
-    ]
 
-
-@pytest.mark.parametrize("contact", testdata, ids=[repr(y) for y in testdata])
+@pytest.mark.parametrize("contact", testdata, ids=[repr(x) for x in testdata])
 def test_add_contact(app):
     old_contact_list = app.contact.get_contact_list()
     contact = Contact(firstname="Ivan", middlename="Sergeevich", lastname="Petrov", nickname="Butthead", title="test",
